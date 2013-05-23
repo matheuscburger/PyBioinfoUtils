@@ -36,6 +36,8 @@ if __name__ == "__main__":
 	op_template = env.get_template("runoptions.html")
 	qual_template = env.get_template("qual.html")
 	map_template = env.get_template("map.html")
+	vcf_template = env.get_template("vcf.html")
+	snv_template = env.get_template("snv.html")
 	samplere = re.compile(r"(\S+)_fastqc")
 	for r in runs:
 		with open(os.path.join(runsDir, r, "index.html"), 'w') as index:
@@ -51,19 +53,31 @@ if __name__ == "__main__":
 				print >>index, qual_template.render(runname=r, samples=samples)
 		except OSError, e:
 			print >>sys.stderr, "Diretorio fastQCresult não existe: ",e
+		with open(os.path.join(runsDir, r, "map.html"), 'w') as index:
+			print >>index, map_template.render(runname=r)
+		
 		vcfs = []
 		snvs = [] 
+		sinvs = [] 
+		#ignoresnvs = ["brca1"]	
 		try:
 			for vcffilenames in os.listdir(os.path.join(runsDir, r, 'mapping', 'vcf')):
 				if re.search(r"\.vcf$",vcffilenames):
 					vcfs.append(vcffilenames)
 			vcfs.sort()
+			with open(os.path.join(runsDir, r, "vcf.html"), 'w') as index:
+				print >>index, vcf_template.render(runname=r, vcfs=vcfs)
+
 			for snvfilenames in os.listdir(os.path.join(runsDir, r, 'mapping', 'snv')):
-				if re.search(r"\.si*nv",snvfilenames):
+				if re.search(r"\.snv",snvfilenames):
 					snvs.append(snvfilenames)
+				elif re.search(r"\.sinv",snvfilenames):
+					sinvs.append(snvfilenames)
 			snvs.sort()
-			with open(os.path.join(runsDir, r, "map.html"), 'w') as index:
-				print >>index, map_template.render(runname=r, vcfs=vcfs, snvs=snvs)
+			sinvs.sort()
+			print >>sys.stderr, snvs
+			with open(os.path.join(runsDir, r, "snv.html"), 'w') as index:
+				print >>index, snv_template.render(runname=r,snvs=snvs, sinvs=sinvs)
 		except OSError, e:
 			print >>sys.stderr, "Diretorio mapping inexistente ou incompleto: ",e
 

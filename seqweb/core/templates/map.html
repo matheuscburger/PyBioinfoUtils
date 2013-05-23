@@ -1,58 +1,17 @@
 {% extends "base.html" %}
-{% block title %}{{ runname }}{% endblock %}
-{% block script %}
-	<script>
-		$(function (){
-			$('#maptab a:last').tab('show');
-		});
-	</script>
-{% endblock %}
+{% block title %}{{ runnname }}{% endblock %}
 {% block content %}
 <div class="page-header">
 	<h1>
-		Mapping Results
-		<small>
-			{{ runname }}
-		</small>
+		{{ runname }}
 	</h1>
 </div>
-<div class='tabbable tabs-left'> 
-	<ul class='nav nav-tabs' id='maptab'>
-		<li class="active"><a href='#tab1' data-toggle='tab'>SNV</a></li>
-		<li><a href='#tab2' data-toggle='tab'>VCF</a></li>
-	</ul>
-	<div class='tab-content'>
-		<div class='tab-pane active' id='tab1'>
-			<div id='runsList'>
-				<ul class="nav nav-list">
-				<li class='nav-header'>SNVs List</li>
-				{% for s in snvs %}
-					<li class='active'> <a href="mapping/snv/{{s}}">{{s}}</a> </li>
-				{% endfor %}
-				</ul>
-			</div>
-			
-		</div>
-		<div class='tab-pane' id='tab2'>
-			<div id='runsList'>
-				<ul class="nav nav-list">
-				<li class='nav-header'>VCFs List</li>
-				{% for v in vcfs %}
-					<li class='active'> <a href="mapping/vcf/{{v}}">{{v}}</a> </li>
-				{% endfor %}
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
-{# 
 <div id='runsList'>
 	<ul class="nav nav-list">
-	<li class='nav-header'>Run List</li>
-	{% for r in runs %}
-	<li class='active'> <a href="{{r}}">{{r}}</a> </li>
-	{% endfor %}
+	<li class='nav-header'>Options</li>
+	<li class='active'> <a href="vcf.html">VCF</a> </li>
+	<li class='active'> <a href="snv.html">SNV</a> </li>
 	</ul>
 </div>
-#}
+
 {% endblock %}
