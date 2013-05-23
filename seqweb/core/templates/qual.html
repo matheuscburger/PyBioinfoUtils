@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ runname }}{% endblock %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		Quality Control
+		<small>
+			{{ runname }}
+		</small>
+	</h1>
+</div>
+<div id='runsList'>
+	<ul class="nav nav-list">
+	<li class='nav-header'>Samples</li>
+	{% for s in samples %}
+	<li class='active'> <a href="raw/fastQCresult/{{s}}_fastqc/fastqc_report.html">{{s}}</a> </li>
+	{% endfor %}
+	</ul>
+</div>
+
+{% endblock %}
