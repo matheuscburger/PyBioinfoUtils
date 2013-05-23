@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ runname }}{% endblock %}
+{% block script %}
+	<script>
+		$(function (){
+			$('#maptab a:last').tab('show');
+		});
+	</script>
+{% endblock %}
+{% block content %}
+<div class="page-header">
+	<h1>
+		Mapping Results
+		<small>
+			{{ runname }}
+		</small>
+	</h1>
+</div>
+<div id='runsList'>
+	<ul class="nav nav-list">
+	<li class='nav-header'>VCF List</li>
+	{% for v in vcfs %}
+		<li class='active'> <a href="mapping/vcf/{{v}}">{{v}}</a> </li>
+	{% endfor %}
+	</ul>
+</div>
+		
+{% endblock %}
