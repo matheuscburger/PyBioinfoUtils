@@ -201,9 +201,10 @@ class PyBiomart(object):
 			fl.readline()
 			for line in fl:
 				vline = line.strip().split("\t")
-				if not result.has_key(vline[0]):
-					result[vline[0]] = []
-				result[vline[0]].append(vline[1])
+				if len(vline) > 1:
+					if not result.has_key(vline[0]):
+						result[vline[0]] = []
+					result[vline[0]].append(vline[1])
 		else:
 			sys.stderr.write("Please, choose valid filter and attribute!\n")
 			return
