@@ -34,7 +34,7 @@ if __name__ == "__main__":
 	infh = sys.stdin	# input file handle
 	if arguments['--in']:
 		infh = open(arguments['--in'])
-	outfh = sys.stdin	# output file handle
+	outfh = sys.stdout	# output file handle
 	if arguments['--out']:
 		outfh = open(arguments['--out'], "w")
 	min_len = int(arguments['<min>'])
